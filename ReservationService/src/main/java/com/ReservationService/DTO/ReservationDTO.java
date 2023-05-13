@@ -1,4 +1,4 @@
-package com.ReservationService.model;
+package com.ReservationService.DTO;
 
 import com.ReservationService.model.enums.Status;
 import lombok.AllArgsConstructor;
@@ -9,8 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reservation {
-    private String id;
+public class ReservationDTO {
     private String accommodationId;
     private String guestId;
     private LocalDate checkIn;
