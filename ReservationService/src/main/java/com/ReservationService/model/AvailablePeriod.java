@@ -1,33 +1,29 @@
 package com.ReservationService.model;
 
-import com.ReservationService.model.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.time.LocalDate;
-@Data
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Document
-public class Reservation {
+public class AvailablePeriod {
     @Id
     private String id;
     @Field
+    private LocalDate start;
+    @Field
+    private LocalDate end;
+    @Field
+    private int price;
+    @Field
     private String accommodationId;
     @Field
-    private String guestId;
-    @Field
-    private LocalDate checkIn;
-    @Field
-    private LocalDate checkOut;
-    @Field
-    private Integer guestNumber;
-    @Field
-    private double totalPrice;
-    @Field
-    private Status status;
+    private List<Reservation> reservations;
 }
