@@ -12,3 +12,15 @@ db.reservation.insert(
         "status": "RESERVED"
     }
 );
+
+db.reservation.insert(
+    {
+            "accommodationId": 1,
+            "guestId": 1,
+            "checkIn": new ISODate("2023-03-24T10:01:43.161Z"),
+            "checkOut": new ISODate("2023-03-24T10:01:43.161Z"),
+            "guestNumber": 8,
+            "totalPrice": 280.0,
+            "status": "RESERVED"
+    }
+);

@@ -29,19 +29,17 @@ public class ReservationService {
         return reservation;
     }
 
-    public List<Reservation> getAllByUser(String id){
+    public List<ReservationDTO> getAllByUser(String id){
         Optional<List<Reservation>> reservations = reservationRepository.findAllByGuestId(id);
-        System.out.println("****************************" + reservations.get().size() + "**********************************************");
         List<Reservation> approvedReservations = new ArrayList<>();
         if(!reservations.isEmpty()){
             for (Reservation reservation: reservations.get()) {
-                System.out.println(reservation.getStatus());
                 if(reservation.getStatus().equals(Status.RESERVED)){
                     approvedReservations.add(reservation);
                 }
             }
         }
-        return approvedReservations;
+        return reservationMapper.ListToDto(approvedReservations);
     }
 
     public Boolean delete(String id){
