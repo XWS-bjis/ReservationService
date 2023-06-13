@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/reservation")
+@CrossOrigin(origins = "http://localhost:8084")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -36,8 +37,8 @@ public class ReservationController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<Reservation>> allByUser(@PathVariable("id") String id){
-        List<Reservation> reservations = reservationService.getAllByUser(id);
+    public ResponseEntity<List<ReservationDTO>> allByUser(@PathVariable("id") String id){
+        List<ReservationDTO> reservations = reservationService.getAllByUser(id);
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
