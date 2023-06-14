@@ -42,6 +42,11 @@ public class ReservationController {
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
+    @GetMapping("/user/{userId}/visited")
+    public ResponseEntity<List<String>> getAllAccommodationIdsVisitedByUser(@PathVariable("userId") String userId) {
+        return new ResponseEntity<>(reservationService.getAllAccommodationIdsVisitedByUser(userId), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") String id){
         if(reservationService.delete(id))

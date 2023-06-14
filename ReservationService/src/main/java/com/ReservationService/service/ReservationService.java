@@ -7,10 +7,9 @@ import com.ReservationService.model.enums.Status;
 import com.ReservationService.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ReservationService {
@@ -55,5 +54,19 @@ public class ReservationService {
             return true;
         }
         return false;
+    }
+
+    public List<String> getAllAccommodationIdsVisitedByUser(String userId) {
+        var optionalReservations = reservationRepository.findAllByGuestId(userId);
+        if (optionalReservations.isEmpty()) return new ArrayList<String>();
+        var reservations = optionalReservations.get();
+        var accommodationIds = new ArrayList<String>();
+        for (var a: reservations) {
+            System.out.println(a);
+            if (a.getStatus() == Status.RESERVED && a.getCheckIn().isBefore(LocalDate.now())) accommodationIds.add(a.getAccommodationId());
+        }
+        System.out.println(accommodationIds);
+        Set<String> uniqueAccommodationIdsSet = new HashSet<>(accommodationIds);
+        return List.of(uniqueAccommodationIdsSet.toArray(new String[0]));
     }
 }

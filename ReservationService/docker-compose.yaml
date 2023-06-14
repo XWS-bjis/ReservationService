@@ -6,12 +6,12 @@ services:
     ports:
       - 8083:8083
     depends_on:
-      - mongodb
+      - mongodb-reservation
     environment:
       eureka.client.service-url.defaultZone: http://airline:8761/eureka
-  mongodb:
+  mongodb-reservation:
     image: mongo
-    container_name: mongodb_res
+    container_name: mongodb-reservation
     ports:
       - 27017:27017
     volumes:
@@ -20,16 +20,16 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
-  mongo-express:
+  mongo-express-reservation:
     image: mongo-express
-    container_name: mongo-express_res
+    container_name: mongo-express-reservation
     restart: always
     ports:
       - 8081:8081
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
       - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_SERVER=mongodb-reservation
 volumes:
   data: {}
 
