@@ -53,4 +53,10 @@ public class ReservationController {
             return new ResponseEntity(HttpStatus.OK);
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/history/user/{id}")
+    public ResponseEntity<List<String>> getAllByGuest(@PathVariable("id") String id){
+
+        return new ResponseEntity<>(reservationService.getAllAccommodationIdsVisitedByUser(id), HttpStatus.OK);
+    }
 }
