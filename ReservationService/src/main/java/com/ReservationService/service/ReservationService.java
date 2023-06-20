@@ -5,7 +5,12 @@ import com.ReservationService.mapper.ReservationMapper;
 import com.ReservationService.model.Reservation;
 import com.ReservationService.model.enums.Status;
 import com.ReservationService.repository.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +21,9 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public ReservationService(ReservationRepository reservationRepository, ReservationMapper reservationMapper) {
         this.reservationRepository = reservationRepository;
@@ -68,5 +76,10 @@ public class ReservationService {
         System.out.println(accommodationIds);
         Set<String> uniqueAccommodationIdsSet = new HashSet<>(accommodationIds);
         return List.of(uniqueAccommodationIdsSet.toArray(new String[0]));
+    }
+
+    public List<String> getAllHostIdVisitedByUser(String userId){
+        List<String> accommodationIds = getAllAccommodationIdsVisitedByUser(userId);
+        return accommodationIds;
     }
 }

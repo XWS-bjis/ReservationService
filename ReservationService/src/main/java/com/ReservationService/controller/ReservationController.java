@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/reservation")
-@CrossOrigin(origins = "http://localhost:8084")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -52,5 +52,11 @@ public class ReservationController {
         if(reservationService.delete(id))
             return new ResponseEntity(HttpStatus.OK);
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/history/user/{id}")
+    public ResponseEntity<List<String>> getAllByGuest(@PathVariable("id") String id){
+
+        return new ResponseEntity<>(reservationService.getAllAccommodationIdsVisitedByUser(id), HttpStatus.OK);
     }
 }
